@@ -63,30 +63,45 @@ namespace exercis_1_5_predpoved_pocasi
         {
             foreach (XmlNode podNod in hlavniNod.ChildNodes)
             {
-                if (hlavniNod.Name.Equals("product"))
-                {
-                    if (cas.Count == 0 || !cas.Contains(podNod.Attributes["to"].Value))
-                    {
-                        cas.Add(podNod.Attributes["to"].Value);
-                    }
-                }
-                else if (hlavniNod.Name.Equals("location"))
-                {
-                    if (podNod.Name.Equals("temperature"))
-                    {
-                        teploty.Add(podNod.Attributes["value"].Value);
-                    }
-                    else if (podNod.Name.Equals("windSpeed"))
-                    {
-                        rychlostVetru.Add(podNod.Attributes["mps"].Value);
-                    }
-                    else if (podNod.Name.Equals("pressure"))
-                    {
-                        tlak.Add(podNod.Attributes["value"].Value);
-                    }
-                }
-
+                hledanyUdaj(hlavniNod, podNod);
                 ProjdiNody(podNod);
+            }
+        }
+
+        private static void hledanyUdaj(XmlNode hlavniNod, XmlNode podNod)
+        {
+            if (hlavniNod.Name.Equals("product"))
+            {
+                zpracujCas(podNod);
+            }
+            else if (hlavniNod.Name.Equals("location"))
+            {
+                zpracujUdaj(podNod);
+            }
+        }
+
+        private static void zpracujCas(XmlNode podNod)
+        {
+            string value = podNod.Attributes["to"].Value;
+            if (cas.Count == 0 || !cas.Contains(value))
+            {
+                cas.Add(value);
+            }
+        }
+
+        private static void zpracujUdaj(XmlNode podNod)
+        {
+            switch (podNod.Name)
+            {
+                case "temperature":
+                    teploty.Add(podNod.Attributes["value"].Value);
+                    break;
+                case "windSpeed":
+                    rychlostVetru.Add(podNod.Attributes["mps"].Value);
+                    break;
+                case "pressure":
+                    tlak.Add(podNod.Attributes["value"].Value);
+                    break;
             }
         }
 
