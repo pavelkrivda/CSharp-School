@@ -27,10 +27,8 @@ namespace Exercise_3.SamplesLibrary
         }
 
         public bool Minus { get; private set; }
-
         public bool Signed { get; private set; }
-
-
+        
         public uint Value3 { get; set; } = 15;
 
         private static int GetMaxInt()
