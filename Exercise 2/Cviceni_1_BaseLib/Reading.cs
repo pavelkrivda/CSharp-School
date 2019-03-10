@@ -3,7 +3,10 @@
 namespace Fei
 {
     namespace BaseLib
-    {
+    {/// <summary>
+     /// Třída umožnuje načítat data z klávesnice v různých formátech. Vždy uživatele informuje
+     /// jaké hodnoty má zadat.
+     /// </summary>
         public class Reading
         {
             /// <summary>
