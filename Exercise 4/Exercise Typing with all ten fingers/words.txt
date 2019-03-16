@@ -1,0 +1,5 @@
+﻿car
+horse
+cat
+beer
+people
