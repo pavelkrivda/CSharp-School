@@ -5,12 +5,13 @@ namespace Cviceni_Delegat
 {
     public class Students
     {
-       private StringComparer comparer = StringComparer.OrdinalIgnoreCase; 
-        
-        private Student[] students = new Student[100];
+       private StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+       private const int SIZE_STUDENT_ARRAY = 100;
+        private Student[] students = new Student[SIZE_STUDENT_ARRAY];
         private int studentCount = 0;
 
-        private delegate int ShortStudentsHandler(Student firstStudetn, Student secoundStudent);
+        private delegate int ShortStudentsHandler(object sender, StudentsEventArgs eventArgs);
 
         /// <summary>
         /// Testuje funkčnost třídy
@@ -20,9 +21,9 @@ namespace Cviceni_Delegat
             int choice = 0;
             do
             {
-                printMenu();
+                PrintMenu();
                 choice = Reading.ReadInt("Zadej svoji volbu");
-                executeChoice(choice);
+                ExecuteChoice(choice);
             } while (choice != 0);
         }
 
@@ -30,27 +31,27 @@ namespace Cviceni_Delegat
         /// Zpracovává volby zadané uživatelem z hlavního menu.
         /// </summary>
         /// <param name="choice">Volba uživatele.</param>
-        private void executeChoice(int choice)
+        public void ExecuteChoice(int choice)
         {
             switch (choice)
             {
                 case 1:
-                    addStudents();
+                    AddStudents();
                     break;
 
                 case 2:
-                    printStudents();
+                    PrintStudents();
                     break;
 
                 case 3:
-                    shortStudents(Key.Number);
+                    ShortStudents(Key.Number);
                     break;
 
                 case 4:
-                    shortStudents(Key.Name);
+                    ShortStudents(Key.Name);
                     break;
                 case 5:
-                    shortStudents(Key.Faculty);
+                    ShortStudents(Key.Faculty);
                     break;
             }
         }
@@ -58,7 +59,7 @@ namespace Cviceni_Delegat
         /// <summary>
         /// Vypíše menu na obrazovku.
         /// </summary>
-        private void printMenu()
+        public void PrintMenu()
         {
             Console.WriteLine("1) Načtení studentů z klávesnice\n" +
                               "2) Výpis studentů na obrazovku\n" +
@@ -106,7 +107,7 @@ namespace Cviceni_Delegat
         /// <summary>
         /// Přidá studenta do pole
         /// </summary>
-        private void addStudents()
+        public void AddStudents()
         {
             string name;
             int number;
@@ -148,7 +149,7 @@ namespace Cviceni_Delegat
         /// <summary>
         /// Vytiskne studenty uložené v poli.
         /// </summary>
-        private void printStudents()
+        public void PrintStudents()
         {
             for (int i = 0; i < studentCount; i++)
                 Console.WriteLine(students[i]);
@@ -161,12 +162,12 @@ namespace Cviceni_Delegat
         /// <param name="secondStudent">Student jehož číslo se bude porovnávat s prvním studentem.</param>
         /// <returns>Vrátí 1 pokud má první studen větší číslo než druhý.
         ///Vrátí 0 pokud jsou čísla stejné a -1 pokud je číslo druhého studenta větší než prvního.</returns>
-        private int shortByNumber(Student firstStudent, Student secondStudent)
+        private int shortByNumber(object sender, StudentsEventArgs eventArgs)
         {
-            if (firstStudent.Number < secondStudent.Number)
+            if (eventArgs.Student1.Number < eventArgs.Student2.Number)
                 return -1;
 
-            return firstStudent.Number.Equals(secondStudent.Number) ? 0 : 1;
+            return eventArgs.Student1.Number.Equals(eventArgs.Student2.Number) ? 0 : 1;
         }
 
         /// <summary>
@@ -176,9 +177,9 @@ namespace Cviceni_Delegat
         /// <param name="secondStudent">Student jehož jméno se bude porovnávat se jménem prvním studentem.</param>
         /// <returns>Vrátí 1 pokud má první studen delší jméno než druhý.
         ///Vrátí 0 pokud je jméno stejné a -1 pokud je jméno druhého studenta větší než prvního.</returns>
-        private int shortByName(Student firstStudent, Student secondStudent)
+        private int shortByName(object sender, StudentsEventArgs evetArgs)
         {
-            return comparer.Compare(firstStudent.Name, secondStudent.Name);
+            return comparer.Compare(evetArgs.Student1.Name, evetArgs.Student2.Name);
         }
 
         /// <summary>
@@ -188,9 +189,9 @@ namespace Cviceni_Delegat
         /// <param name="secondStudent">Student jehož fakulta se bude porovnávat s fakultou prvním studenta.</param>
         /// <returns>Vrátí 1 pokud má první studen fakultu v seznamu výše než druhý.
         ///Vrátí 0 pokud je fakulta stejná a -1 pokud je fakulta v seznamu nížš než  u druhého studenta.</returns>
-        private int shortByFaculty(Student firstStudent, Student secondStudent)
+        private int shortByFaculty(object sender, StudentsEventArgs eventArgs)
         {
-            return comparer.Compare(firstStudent.Faculty, secondStudent.Faculty);
+            return comparer.Compare(eventArgs.Student1.Faculty, eventArgs.Student2.Faculty);
         }
 
         /// <summary>
@@ -199,7 +200,7 @@ namespace Cviceni_Delegat
         /// <param name="key">Klíč podle kterého se bude řadit</param>
         /// <exception cref="Exception">Vyjímka v případě že je seznam prázný</exception>
         /// <exception cref="ArgumentException">Vyjímka pokud nen zadán validní klíč</exception>
-        private void shortStudents(Key key)
+        public void ShortStudents(Key key)
         {
             if (studentCount == 0)
                 throw new Exception("Pole je prázdné!");
@@ -231,7 +232,7 @@ namespace Cviceni_Delegat
             {
                 for (int j = 0; j < studentCount - i - 1; j++)
                 {
-                    if (shortStudents(students[j + 1], students[j]) < 1)
+                    if (shortStudents(this,new StudentsEventArgs(students[j + 1], students[j])) < 1)
                     {
                         Student tmp = students[j + 1];
                         students[j + 1] = students[j];
