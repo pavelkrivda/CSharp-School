@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Exercise_Liga_Mistru
 {
-    class Player
+    class OriginalCountPlayersEventArgs
     {
-        public string Jmeno { get; set; }
-        public FootballClub Klub { get; set; }
-        public int GolPocet { get; set; }
+        public int OriginalCountPlayers { get; set; }
     }
 }

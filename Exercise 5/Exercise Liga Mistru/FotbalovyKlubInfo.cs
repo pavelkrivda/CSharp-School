@@ -8,10 +8,10 @@ namespace Exercise_Liga_Mistru
 {
     class FotbalovyKlubInfo
     {
-        public readonly int Pocet = Enum.GetNames(typeof(FotbalovyKlub)).Length;;
-        private FotbalovyKlub fotbalovyKlub;
+        public readonly int Pocet = Enum.GetNames(typeof(FootballClub)).Length;
+        private FootballClub fotbalovyKlub;
 
-        public FotbalovyKlubInfo(FotbalovyKlub fotbalovyKlub)
+        public FotbalovyKlubInfo(FootballClub fotbalovyKlub)
         {
             this.fotbalovyKlub = fotbalovyKlub;
         }

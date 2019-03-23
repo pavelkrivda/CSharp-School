@@ -1,26 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Exercise_Liga_Mistru
 {
-    public enum FotbalovyKlub
-    {
-        None,
-        FC_Porto,
-        Arsenal,
-        Real_Madrid,
-        Chelsea,
-        Barcelona
-    }
-
-
     public partial class MainWindow : Form
     {
 
@@ -28,6 +12,44 @@ namespace Exercise_Liga_Mistru
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void addPlayerButton_Click(object sender, EventArgs e)
+        {
+            PlayerWindow playerWindow = new PlayerWindow();
+            playerWindow.ShowDialog();
+        }
+
+        private void removePlayerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editPlayerButton_Click(object sender, EventArgs e)
+        {
+            PlayerWindow playerWindow = new PlayerWindow();
+            playerWindow.ShowDialog();
+        }
+
+        private void findBestClubButton_Click(object sender, EventArgs e)
+        {
+            TopClubsWindow topClubs = new TopClubsWindow();
+            topClubs.ShowDialog();
+        }
+
+        private void registerHandlerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void unregisterHandlerButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

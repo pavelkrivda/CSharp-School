@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 
 namespace Exercise_Liga_Mistru
 {
+    public delegate void PocetZmenenEventHandler(object sender, EventArgs eventArgs);
+
     class Players
     {
-        public delegate 
 
         private const int MAX_PLAYER_COUNT = 20;
         private Player[] players = new Player[MAX_PLAYER_COUNT];
         public int CountPlayer { get; set; }
 
+        private event PocetZmenenEventHandler PocetZmenen;
+
         public void RemovePlayer(int index)
         {
             if (index < 0 || index > CountPlayer)
             {
-                throw  new ArgumentException("Neplatný index!");
+                throw new ArgumentException("Neplatný index!");
             }
 
             players[index] = null;
@@ -51,10 +54,25 @@ namespace Exercise_Liga_Mistru
             set { players[index] = value; }
         }
 
-        public (FotbalovyKlub[], int[]) NajdiNejlepsiKluby(FotbalovyKlub[] clubs, int[] golCount)
+        public (FootballClub[], int) NajdiNejlepsiKluby(FootballClub[] clubs, int[] golCount)
+        {
+            int maxGol = findBestClubByGolNumber();
+
+            return (null, maxGol);
+        }
+
+        private List<(FootballClub, int)> summGolsAllPlayersInClub()
+        {
+            List<(FootballClub, int)> clubs = new List<(FootballClub, int)>();
+
+            return null;
+        }
+
+        private int findBestClubByGolNumber()
         {
 
-            return (null, null);
+
+            return 0;
         }
     }
 }

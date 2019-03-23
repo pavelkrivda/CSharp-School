@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clubs.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +54,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="FotbalovyKlubInfo.cs" />
+    <Compile Include="OriginalCountPlayersEventArgs.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Players.cs" />
     <Compile Include="PlayerWindow.cs">
@@ -69,6 +71,9 @@
     <Compile Include="TopClubsWindow.Designer.cs">
       <DependentUpon>TopClubsWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlayerWindow.resx">
       <DependentUpon>PlayerWindow.cs</DependentUpon>
     </EmbeddedResource>
