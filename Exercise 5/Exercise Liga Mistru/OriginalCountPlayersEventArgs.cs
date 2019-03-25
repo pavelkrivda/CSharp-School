@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Exercise_Liga_Mistru
 {
-    class OriginalCountPlayersEventArgs
+    public class OriginalCountPlayersEventArgs
     {
         public int OriginalCountPlayers { get; set; }
+
+        public OriginalCountPlayersEventArgs(int originalCountPlayers)
+        {
+            OriginalCountPlayers = originalCountPlayers;
+        }
     }
 }

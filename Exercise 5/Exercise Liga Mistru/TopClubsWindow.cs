@@ -1,20 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Exercise_Liga_Mistru
 {
     public partial class TopClubsWindow : Form
     {
-        public TopClubsWindow()
+        public TopClubsWindow(FootballClub[] clubs, int countGols)
         {
             InitializeComponent();
+            
+            countGolsTextBox.Text = countGols.ToString();
+
+            foreach (var club in clubs)
+                topClubsListBox.Items.Add(club);
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

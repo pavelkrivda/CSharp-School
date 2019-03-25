@@ -6,10 +6,22 @@ using System.Threading.Tasks;
 
 namespace Exercise_Liga_Mistru
 {
-    class Player
+    public class Player
     {
-        public string Jmeno { get; set; }
-        public FootballClub Klub { get; set; }
-        public int GolPocet { get; set; }
+        public string Name { get; set; }
+        public FootballClub Club { get; set; }
+        public int GolsCount { get; set; }
+
+        public Player(string name, FootballClub club, int golsCount)
+        {
+            Name = name;
+            Club = club;
+            GolsCount = golsCount;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} {Club} {GolsCount}";
+        }
     }
 }

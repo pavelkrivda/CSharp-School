@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exercise_Liga_Mistru
 {
-    public delegate void PocetZmenenEventHandler(object sender, EventArgs eventArgs);
+    public delegate void PocetZmenenEventHandler(object sender, OriginalCountPlayersEventArgs eventArgs);
 
     class Players
     {
-
         private const int MAX_PLAYER_COUNT = 20;
         private Player[] players = new Player[MAX_PLAYER_COUNT];
-        public int CountPlayer { get; set; }
+        public int CountPlayer { get; private set; }
 
-        private event PocetZmenenEventHandler PocetZmenen;
+        private event PocetZmenenEventHandler OnChangeCountPlayers;
+
+        public Players(PocetZmenenEventHandler countPlayersHandler)
+        {
+            OnChangeCountPlayers += countPlayersHandler;
+        }
 
         public void RemovePlayer(int index)
         {
@@ -26,14 +27,23 @@ namespace Exercise_Liga_Mistru
 
             players[index] = null;
             reorganizePlayers();
+            OnChangeCountPlayers(this, new OriginalCountPlayersEventArgs(CountPlayer + 1));
         }
-
-        public int Pocet { get; }
 
         private void reorganizePlayers()
         {
-            //TODO srovnej pole pokud nebyl odebran hrac z konce pole 
-
+            for (int i = 0; i < players.Length - 1; i++)
+            {
+                if (players[i] == null && players[i + 1] != null)
+                {
+                    players[i] = players[i + 1];
+                    players[i + 1] = null;
+                }
+                else if (players[i] == null && players[i + 1] == null)
+                {
+                    break;
+                }
+            }
 
             --CountPlayer;
         }
@@ -45,34 +55,42 @@ namespace Exercise_Liga_Mistru
                 throw new ArgumentException("Nelze vložit dalšího hráče!");
             }
 
+            
             players[CountPlayer++] = player;
+            OnChangeCountPlayers(this, new OriginalCountPlayersEventArgs(CountPlayer - 1));
         }
 
         public Player this[int index]
         {
             get { return players[index]; }
-            set { players[index] = value; }
         }
 
-        public (FootballClub[], int) NajdiNejlepsiKluby(FootballClub[] clubs, int[] golCount)
+        public void NajdiNejlepsiKluby(out FootballClub[] clubs, out int golCount)
         {
-            int maxGol = findBestClubByGolNumber();
+            golCount = 0;
 
-            return (null, maxGol);
-        }
+           var clubsGols = new (FootballClub, int)[Clubs.getCountClubs()];
+           
+            Player[] tempPlayers = new Player[CountPlayer];
+            Array.Copy(players, tempPlayers, CountPlayer);
 
-        private List<(FootballClub, int)> summGolsAllPlayersInClub()
-        {
-            List<(FootballClub, int)> clubs = new List<(FootballClub, int)>();
+           for (int i = 0; i < Clubs.getCountClubs(); i++)
+                clubsGols[i] = (((FootballClub)i),(from player in tempPlayers 
+                    where player.Club == ((FootballClub)i) select player.GolsCount).Sum());
 
-            return null;
-        }
+            var shortClubs = clubsGols.OrderBy(tuple => tuple.Item2).Select(tuple => tuple);
 
-        private int findBestClubByGolNumber()
-        {
+            var topClubs = shortClubs.Where(tuple => tuple.Item2 >= (shortClubs.Max(tuple2 => tuple2.Item2)))
+                .Select(tuple => tuple);
 
-
-            return 0;
+            clubs = new FootballClub[topClubs.Count()];
+            
+            int index = 0;
+            foreach (var values in topClubs)
+            {
+                clubs[index++] = values.Item1;
+                golCount = values.Item2;
+            }
         }
     }
 }

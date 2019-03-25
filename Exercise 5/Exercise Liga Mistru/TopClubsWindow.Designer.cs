@@ -31,8 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.countGolsTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.exitButton = new System.Windows.Forms.Button();
             this.topClubsListBox = new System.Windows.Forms.ListBox();
+            this.exitButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kluby";
             // 
+            // topClubsListBox
+            // 
+            this.topClubsListBox.FormattingEnabled = true;
+            this.topClubsListBox.Location = new System.Drawing.Point(6, 19);
+            this.topClubsListBox.Name = "topClubsListBox";
+            this.topClubsListBox.Size = new System.Drawing.Size(155, 121);
+            this.topClubsListBox.TabIndex = 0;
+            // 
             // exitButton
             // 
             this.exitButton.Location = new System.Drawing.Point(104, 193);
@@ -71,14 +79,7 @@
             this.exitButton.TabIndex = 3;
             this.exitButton.Text = "OK";
             this.exitButton.UseVisualStyleBackColor = true;
-            // 
-            // topClubsListBox
-            // 
-            this.topClubsListBox.FormattingEnabled = true;
-            this.topClubsListBox.Location = new System.Drawing.Point(6, 19);
-            this.topClubsListBox.Name = "topClubsListBox";
-            this.topClubsListBox.Size = new System.Drawing.Size(155, 121);
-            this.topClubsListBox.TabIndex = 0;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // TopClubsWindow
             // 

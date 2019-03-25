@@ -167,6 +167,7 @@
             this.addPlayerButton.TabIndex = 0;
             this.addPlayerButton.Text = "OK";
             this.addPlayerButton.UseVisualStyleBackColor = true;
+            this.addPlayerButton.Click += new System.EventHandler(this.addPlayerButton_Click);
             // 
             // stornoPlayerButton
             // 
@@ -179,6 +180,7 @@
             this.stornoPlayerButton.TabIndex = 1;
             this.stornoPlayerButton.Text = "Zrušit";
             this.stornoPlayerButton.UseVisualStyleBackColor = true;
+            this.stornoPlayerButton.Click += new System.EventHandler(this.stornoPlayerButton_Click);
             // 
             // PlayerWindow
             // 
