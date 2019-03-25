@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.enteredPositionAnyRadioButton = new System.Windows.Forms.RadioButton();
+            this.enteredPositionLastRadioButton = new System.Windows.Forms.RadioButton();
+            this.enteredPositionFirstRadioButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.enteredTypeWordsRadioButton = new System.Windows.Forms.RadioButton();
+            this.enteredTypeCharacterRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.enteredPositionAnyRadioButton);
+            this.groupBox1.Controls.Add(this.enteredPositionLastRadioButton);
+            this.groupBox1.Controls.Add(this.enteredPositionFirstRadioButton);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 95);
@@ -52,37 +52,40 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "The character that must be entered:";
             // 
-            // radioButton3
+            // enteredPositionAnyRadioButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 66);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(43, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Any";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.enteredPositionAnyRadioButton.AutoSize = true;
+            this.enteredPositionAnyRadioButton.Checked = true;
+            this.enteredPositionAnyRadioButton.Location = new System.Drawing.Point(6, 66);
+            this.enteredPositionAnyRadioButton.Name = "enteredPositionAnyRadioButton";
+            this.enteredPositionAnyRadioButton.Size = new System.Drawing.Size(43, 17);
+            this.enteredPositionAnyRadioButton.TabIndex = 2;
+            this.enteredPositionAnyRadioButton.TabStop = true;
+            this.enteredPositionAnyRadioButton.Text = "Any";
+            this.enteredPositionAnyRadioButton.UseVisualStyleBackColor = true;
+            this.enteredPositionAnyRadioButton.CheckedChanged += new System.EventHandler(this.radioButtonEnteredPosition_CheckedChanged);
             // 
-            // radioButton2
+            // enteredPositionLastRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 42);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(45, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Last";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.enteredPositionLastRadioButton.AutoSize = true;
+            this.enteredPositionLastRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.enteredPositionLastRadioButton.Name = "enteredPositionLastRadioButton";
+            this.enteredPositionLastRadioButton.Size = new System.Drawing.Size(45, 17);
+            this.enteredPositionLastRadioButton.TabIndex = 1;
+            this.enteredPositionLastRadioButton.Text = "Last";
+            this.enteredPositionLastRadioButton.UseVisualStyleBackColor = true;
+            this.enteredPositionLastRadioButton.CheckedChanged += new System.EventHandler(this.radioButtonEnteredPosition_CheckedChanged);
             // 
-            // radioButton1
+            // enteredPositionFirstRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(44, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "First";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.enteredPositionFirstRadioButton.AutoSize = true;
+            this.enteredPositionFirstRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.enteredPositionFirstRadioButton.Name = "enteredPositionFirstRadioButton";
+            this.enteredPositionFirstRadioButton.Size = new System.Drawing.Size(44, 17);
+            this.enteredPositionFirstRadioButton.TabIndex = 0;
+            this.enteredPositionFirstRadioButton.Text = "First";
+            this.enteredPositionFirstRadioButton.UseVisualStyleBackColor = true;
+            this.enteredPositionFirstRadioButton.CheckedChanged += new System.EventHandler(this.radioButtonEnteredPosition_CheckedChanged);
             // 
             // label1
             // 
@@ -96,8 +99,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton5);
-            this.groupBox2.Controls.Add(this.radioButton4);
+            this.groupBox2.Controls.Add(this.enteredTypeWordsRadioButton);
+            this.groupBox2.Controls.Add(this.enteredTypeCharacterRadioButton);
             this.groupBox2.Location = new System.Drawing.Point(12, 155);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 76);
@@ -105,27 +108,29 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Write characters or words:";
             // 
-            // radioButton5
+            // enteredTypeWordsRadioButton
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 44);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(56, 17);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.Text = "Words";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.enteredTypeWordsRadioButton.AutoSize = true;
+            this.enteredTypeWordsRadioButton.Location = new System.Drawing.Point(6, 44);
+            this.enteredTypeWordsRadioButton.Name = "enteredTypeWordsRadioButton";
+            this.enteredTypeWordsRadioButton.Size = new System.Drawing.Size(56, 17);
+            this.enteredTypeWordsRadioButton.TabIndex = 1;
+            this.enteredTypeWordsRadioButton.Text = "Words";
+            this.enteredTypeWordsRadioButton.UseVisualStyleBackColor = true;
+            this.enteredTypeWordsRadioButton.CheckedChanged += new System.EventHandler(this.radioButtonEnteredType_CheckedChanged);
             // 
-            // radioButton4
+            // enteredTypeCharacterRadioButton
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(6, 20);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(76, 17);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Characters";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.enteredTypeCharacterRadioButton.AutoSize = true;
+            this.enteredTypeCharacterRadioButton.Checked = true;
+            this.enteredTypeCharacterRadioButton.Location = new System.Drawing.Point(6, 20);
+            this.enteredTypeCharacterRadioButton.Name = "enteredTypeCharacterRadioButton";
+            this.enteredTypeCharacterRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.enteredTypeCharacterRadioButton.TabIndex = 0;
+            this.enteredTypeCharacterRadioButton.TabStop = true;
+            this.enteredTypeCharacterRadioButton.Text = "Characters";
+            this.enteredTypeCharacterRadioButton.UseVisualStyleBackColor = true;
+            this.enteredTypeCharacterRadioButton.CheckedChanged += new System.EventHandler(this.radioButtonEnteredType_CheckedChanged);
             // 
             // Options
             // 
@@ -153,12 +158,12 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton enteredPositionLastRadioButton;
+        private System.Windows.Forms.RadioButton enteredPositionFirstRadioButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton enteredPositionAnyRadioButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton enteredTypeWordsRadioButton;
+        private System.Windows.Forms.RadioButton enteredTypeCharacterRadioButton;
     }
 }

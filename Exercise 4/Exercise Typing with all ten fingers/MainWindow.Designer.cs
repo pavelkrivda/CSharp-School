@@ -62,20 +62,20 @@
             // correctLabel
             // 
             this.correctLabel.Name = "correctLabel";
-            this.correctLabel.Size = new System.Drawing.Size(46, 17);
-            this.correctLabel.Text = "Correct";
+            this.correctLabel.Size = new System.Drawing.Size(58, 17);
+            this.correctLabel.Text = "Correct: 0";
             // 
             // missedLabel
             // 
             this.missedLabel.Name = "missedLabel";
-            this.missedLabel.Size = new System.Drawing.Size(44, 17);
-            this.missedLabel.Text = "Missed";
+            this.missedLabel.Size = new System.Drawing.Size(56, 17);
+            this.missedLabel.Text = "Missed: 0";
             // 
             // accurancyLabel
             // 
             this.accurancyLabel.Name = "accurancyLabel";
-            this.accurancyLabel.Size = new System.Drawing.Size(61, 17);
-            this.accurancyLabel.Text = "accurancy";
+            this.accurancyLabel.Size = new System.Drawing.Size(85, 17);
+            this.accurancyLabel.Text = "Accurancy: 0%";
             // 
             // difficultyLabel
             // 
@@ -99,6 +99,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Enabled = false;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameToolStripMenuItem,
             this.optionsToolStripMenuItem,
@@ -143,7 +144,7 @@
             this.gameListBox.TabIndex = 3;
             this.gameListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gameListBox_KeyDown);
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -155,7 +156,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Form1";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

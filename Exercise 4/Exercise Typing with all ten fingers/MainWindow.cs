@@ -7,6 +7,7 @@ namespace Exercise_Typing_with_all_ten_fingers
     {
         private readonly Random random;
         private readonly Stats stats;
+        private Files files;
 
         private const int DEFAULT_DIFFICULT = 800;
 
@@ -18,6 +19,8 @@ namespace Exercise_Typing_with_all_ten_fingers
 
             random = new Random();
             stats = new Stats();
+            files = new Files("words.txt");
+            files.ReadAllRows();
 
             stats.UpdatedStats += updateCorrectLabel;
             stats.UpdatedStats += updateMissedLabel;
@@ -29,6 +32,8 @@ namespace Exercise_Typing_with_all_ten_fingers
             if (gameListBox.Items.Count == 6)
             {
                 gameTimer.Stop();
+                menuStrip1.Enabled = true;
+
                 DialogResult result;
                 result = MessageBox.Show(this, "Game over!\nYou want to play again?",
                     "Game over",
@@ -40,8 +45,17 @@ namespace Exercise_Typing_with_all_ten_fingers
                 startNewGame();
             }
 
-            int randomNumber = random.Next(65, 90);
-            gameListBox.Items.Add((Keys)randomNumber);
+            int randomNumber;
+            if (Settings.EnteredTypeSelected == EnteredType.CHARACTERS)
+            {
+                randomNumber = random.Next(65, 91);
+                gameListBox.Items.Add((Keys) randomNumber);
+            }
+            else
+            {
+                randomNumber = random.Next(files.CountRows);
+                gameListBox.Items.Add(files.GetWordByIndex(randomNumber));
+            }
         }
 
         private void gameListBox_KeyDown(object sender, KeyEventArgs e)
@@ -99,7 +113,7 @@ namespace Exercise_Typing_with_all_ten_fingers
 
         private void updateAccuracyLabel(object sender, EventArgs e)
         {
-            accurancyLabel.Text = "Accuracy: " + stats.Accuracy.ToString();
+            accurancyLabel.Text = "Accuracy: " + stats.Accuracy.ToString() + '%';
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,6 +123,7 @@ namespace Exercise_Typing_with_all_ten_fingers
 
         private void startNewGame()
         {
+            menuStrip1.Enabled = false;
             gameListBox.Items.Clear();
             gameTimer.Interval = DEFAULT_DIFFICULT;
             gameTimer.Start();
