@@ -4,6 +4,7 @@ using System.Linq;
 namespace Exercise_Liga_Mistru
 {
     public delegate void PocetZmenenEventHandler(object sender, OriginalCountPlayersEventArgs eventArgs);
+    public delegate void RegisterHandler(bool register);
 
     class Players
     {
@@ -11,11 +12,15 @@ namespace Exercise_Liga_Mistru
         private Player[] players = new Player[MAX_PLAYER_COUNT];
         public int CountPlayer { get; private set; }
 
+        private PocetZmenenEventHandler countPlayersHandler;
         private event PocetZmenenEventHandler OnChangeCountPlayers;
+
+        public RegisterHandler Register { get; }
 
         public Players(PocetZmenenEventHandler countPlayersHandler)
         {
-            OnChangeCountPlayers += countPlayersHandler;
+            this.countPlayersHandler = countPlayersHandler;
+            Register = new RegisterHandler(registerHandler);
         }
 
         public void RemovePlayer(int index)
@@ -27,7 +32,8 @@ namespace Exercise_Liga_Mistru
 
             players[index] = null;
             reorganizePlayers();
-            OnChangeCountPlayers(this, new OriginalCountPlayersEventArgs(CountPlayer + 1));
+
+            OnChangeCountPlayers?.Invoke(this, new OriginalCountPlayersEventArgs(CountPlayer + 1));
         }
 
         private void reorganizePlayers()
@@ -55,9 +61,10 @@ namespace Exercise_Liga_Mistru
                 throw new ArgumentException("Nelze vložit dalšího hráče!");
             }
 
-            
+
             players[CountPlayer++] = player;
-            OnChangeCountPlayers(this, new OriginalCountPlayersEventArgs(CountPlayer - 1));
+
+            OnChangeCountPlayers?.Invoke(this, new OriginalCountPlayersEventArgs(CountPlayer - 1));
         }
 
         public Player this[int index]
@@ -69,14 +76,15 @@ namespace Exercise_Liga_Mistru
         {
             golCount = 0;
 
-           var clubsGols = new (FootballClub, int)[Clubs.getCountClubs()];
-           
+            var clubsGols = new (FootballClub, int)[Clubs.getCountClubs()];
+
             Player[] tempPlayers = new Player[CountPlayer];
             Array.Copy(players, tempPlayers, CountPlayer);
 
-           for (int i = 0; i < Clubs.getCountClubs(); i++)
-                clubsGols[i] = (((FootballClub)i),(from player in tempPlayers 
-                    where player.Club == ((FootballClub)i) select player.GolsCount).Sum());
+            for (int i = 0; i < Clubs.getCountClubs(); i++)
+                clubsGols[i] = (((FootballClub)i), (from player in tempPlayers
+                                                    where player.Club == ((FootballClub)i)
+                                                    select player.GolsCount).Sum());
 
             var shortClubs = clubsGols.OrderBy(tuple => tuple.Item2).Select(tuple => tuple);
 
@@ -84,13 +92,21 @@ namespace Exercise_Liga_Mistru
                 .Select(tuple => tuple);
 
             clubs = new FootballClub[topClubs.Count()];
-            
+
             int index = 0;
             foreach (var values in topClubs)
             {
                 clubs[index++] = values.Item1;
                 golCount = values.Item2;
             }
+        }
+
+        private void registerHandler(bool register)
+        {
+            if (register)
+                OnChangeCountPlayers = countPlayersHandler;
+            else
+                OnChangeCountPlayers -= countPlayersHandler;
         }
     }
 }

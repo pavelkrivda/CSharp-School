@@ -30,8 +30,6 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.eventListBox = new System.Windows.Forms.ListBox();
-            this.playersListView = new System.Windows.Forms.ListView();
             this.constrolsButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.addPlayerButton = new System.Windows.Forms.Button();
             this.findBestClubButton = new System.Windows.Forms.Button();
@@ -40,9 +38,11 @@
             this.registerHandlerButton = new System.Windows.Forms.Button();
             this.unregisterHandlerButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.playersListView = new System.Windows.Forms.ListView();
             this.playerNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playerClubsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playerGolsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.eventListBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.constrolsButtonsTableLayoutPanel.SuspendLayout();
@@ -79,29 +79,6 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(493, 211);
             this.tableLayoutPanel.TabIndex = 1;
-            // 
-            // eventListBox
-            // 
-            this.eventListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eventListBox.FormattingEnabled = true;
-            this.eventListBox.Location = new System.Drawing.Point(3, 214);
-            this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(487, 94);
-            this.eventListBox.TabIndex = 0;
-            // 
-            // playersListView
-            // 
-            this.playersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.playerNameColumnHeader,
-            this.playerClubsColumnHeader,
-            this.playerGolsColumnHeader});
-            this.playersListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playersListView.Location = new System.Drawing.Point(3, 3);
-            this.playersListView.Name = "playersListView";
-            this.playersListView.Size = new System.Drawing.Size(387, 205);
-            this.playersListView.TabIndex = 0;
-            this.playersListView.UseCompatibleStateImageBehavior = false;
-            this.playersListView.View = System.Windows.Forms.View.Details;
             // 
             // constrolsButtonsTableLayoutPanel
             // 
@@ -148,6 +125,7 @@
             this.findBestClubButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.findBestClubButton.Enabled = false;
             this.findBestClubButton.Location = new System.Drawing.Point(3, 93);
             this.findBestClubButton.Name = "findBestClubButton";
             this.findBestClubButton.Size = new System.Drawing.Size(94, 24);
@@ -161,6 +139,7 @@
             this.removePlayerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.removePlayerButton.Enabled = false;
             this.removePlayerButton.Location = new System.Drawing.Point(3, 33);
             this.removePlayerButton.Name = "removePlayerButton";
             this.removePlayerButton.Size = new System.Drawing.Size(94, 24);
@@ -174,6 +153,7 @@
             this.editPlayerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.editPlayerButton.Enabled = false;
             this.editPlayerButton.Location = new System.Drawing.Point(3, 63);
             this.editPlayerButton.Name = "editPlayerButton";
             this.editPlayerButton.Size = new System.Drawing.Size(94, 24);
@@ -200,6 +180,7 @@
             this.unregisterHandlerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.unregisterHandlerButton.Enabled = false;
             this.unregisterHandlerButton.Location = new System.Drawing.Point(3, 153);
             this.unregisterHandlerButton.Name = "unregisterHandlerButton";
             this.unregisterHandlerButton.Size = new System.Drawing.Size(94, 24);
@@ -221,6 +202,21 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click_1);
             // 
+            // playersListView
+            // 
+            this.playersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.playerNameColumnHeader,
+            this.playerClubsColumnHeader,
+            this.playerGolsColumnHeader});
+            this.playersListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playersListView.Location = new System.Drawing.Point(3, 3);
+            this.playersListView.Name = "playersListView";
+            this.playersListView.Size = new System.Drawing.Size(387, 205);
+            this.playersListView.TabIndex = 0;
+            this.playersListView.UseCompatibleStateImageBehavior = false;
+            this.playersListView.View = System.Windows.Forms.View.Details;
+            this.playersListView.SelectedIndexChanged += new System.EventHandler(this.playersListView_SelectedIndexChanged);
+            // 
             // playerNameColumnHeader
             // 
             this.playerNameColumnHeader.Text = "Jméno";
@@ -234,6 +230,15 @@
             // playerGolsColumnHeader
             // 
             this.playerGolsColumnHeader.Text = "Góly";
+            // 
+            // eventListBox
+            // 
+            this.eventListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventListBox.FormattingEnabled = true;
+            this.eventListBox.Location = new System.Drawing.Point(3, 214);
+            this.eventListBox.Name = "eventListBox";
+            this.eventListBox.Size = new System.Drawing.Size(487, 94);
+            this.eventListBox.TabIndex = 0;
             // 
             // MainWindow
             // 
