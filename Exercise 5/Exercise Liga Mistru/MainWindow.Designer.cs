@@ -38,11 +38,11 @@
             this.registerHandlerButton = new System.Windows.Forms.Button();
             this.unregisterHandlerButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
-            this.eventListBox = new System.Windows.Forms.ListBox();
             this.playerDataGridView = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.club = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gols = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eventListBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.constrolsButtonsTableLayoutPanel.SuspendLayout();
@@ -203,15 +203,6 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click_1);
             // 
-            // eventListBox
-            // 
-            this.eventListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eventListBox.FormattingEnabled = true;
-            this.eventListBox.Location = new System.Drawing.Point(3, 214);
-            this.eventListBox.Name = "eventListBox";
-            this.eventListBox.Size = new System.Drawing.Size(487, 94);
-            this.eventListBox.TabIndex = 0;
-            // 
             // playerDataGridView
             // 
             this.playerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -224,6 +215,7 @@
             this.playerDataGridView.Name = "playerDataGridView";
             this.playerDataGridView.Size = new System.Drawing.Size(387, 205);
             this.playerDataGridView.TabIndex = 5;
+            this.playerDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.playerDataGridView_CellClick);
             this.playerDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.playerDataGridView_RowsAdded);
             this.playerDataGridView.SelectionChanged += new System.EventHandler(this.playerDataGridView_SelectionChanged);
             // 
@@ -243,6 +235,15 @@
             this.gols.HeaderText = "Góly";
             this.gols.Name = "gols";
             this.gols.ReadOnly = true;
+            // 
+            // eventListBox
+            // 
+            this.eventListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventListBox.FormattingEnabled = true;
+            this.eventListBox.Location = new System.Drawing.Point(3, 214);
+            this.eventListBox.Name = "eventListBox";
+            this.eventListBox.Size = new System.Drawing.Size(487, 94);
+            this.eventListBox.TabIndex = 0;
             // 
             // MainWindow
             // 

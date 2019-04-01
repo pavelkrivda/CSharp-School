@@ -12,7 +12,7 @@ namespace Exercise_Liga_Mistru
         public MainWindow()
         {
             InitializeComponent();
-            playerDataGridView.MultiSelect = false;
+            // playerDataGridView.MultiSelect = false;
 
             players = new Players(
                 new PocetZmenenEventHandler(changeCountPlayers));
@@ -51,14 +51,19 @@ namespace Exercise_Liga_Mistru
         {
             if (playerDataGridView.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Není vybrán hráč který mý být odstraněn!", "Chyba operace", MessageBoxButtons.OK,
+                MessageBox.Show("Není vybrán hráč který má být odstraněn!", "Chyba operace", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             else
             {
-                int index = playerDataGridView.SelectedRows[0].Index;
-                playerDataGridView.Rows.RemoveAt(index);
-                players.RemovePlayer(index);
+                int index;
+
+                for (int i = playerDataGridView.SelectedRows.Count - 1; i >= 0; i--)
+                {
+                    index = playerDataGridView.SelectedRows[i].Index;
+                    playerDataGridView.Rows.RemoveAt(index);
+                    players.RemovePlayer(index);
+                }
             }
 
             removePlayerButton.Enabled = false;
@@ -116,6 +121,11 @@ namespace Exercise_Liga_Mistru
         {
             removePlayerButton.Enabled = true;
             editPlayerButton.Enabled = true;
+        }
+
+        private void playerDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            playerDataGridView.Rows[e.RowIndex].Selected = true;
         }
     }
 }
