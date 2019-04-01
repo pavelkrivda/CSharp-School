@@ -74,10 +74,7 @@ namespace Exercise_Liga_Mistru
 
         public void NajdiNejlepsiKluby(out FootballClub[] clubs, out int golCount)
         {
-            golCount = 0;
-
             var clubsGols = new (FootballClub, int)[Clubs.getCountClubs()];
-
             Player[] tempPlayers = new Player[CountPlayer];
             Array.Copy(players, tempPlayers, CountPlayer);
 
@@ -86,19 +83,12 @@ namespace Exercise_Liga_Mistru
                                                     where player.Club == ((FootballClub)i)
                                                     select player.GolsCount).Sum());
 
-            var shortClubs = clubsGols.OrderBy(tuple => tuple.Item2).Select(tuple => tuple);
 
-            var topClubs = shortClubs.Where(tuple => tuple.Item2 >= (shortClubs.Max(tuple2 => tuple2.Item2)))
-                .Select(tuple => tuple);
+            int maxGolCount = clubsGols.Max(tuple2 => tuple2.Item2);
+            golCount = maxGolCount;
 
-            clubs = new FootballClub[topClubs.Count()];
-
-            int index = 0;
-            foreach (var values in topClubs)
-            {
-                clubs[index++] = values.Item1;
-                golCount = values.Item2;
-            }
+            clubs = clubsGols.Where(tuple => tuple.Item2 >= maxGolCount)
+                .Select(tuple => (tuple.Item1)).ToArray();
         }
 
         private void registerHandler(bool register)
