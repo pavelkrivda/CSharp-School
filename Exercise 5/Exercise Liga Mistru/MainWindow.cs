@@ -12,8 +12,7 @@ namespace Exercise_Liga_Mistru
         public MainWindow()
         {
             InitializeComponent();
-            playersListView.MultiSelect = false;
-            playersListView.FullRowSelect = true;
+            playerDataGridView.MultiSelect = false;
 
             players = new Players(
                 new PocetZmenenEventHandler(changeCountPlayers));
@@ -21,28 +20,17 @@ namespace Exercise_Liga_Mistru
 
         private void addPlayer(Player player)
         {
-            ListViewItem item = new ListViewItem();
-            item.Text = player.Name;
-            item.SubItems.Add(player.Club.ToString());
-            item.SubItems.Add(player.GolsCount.ToString());
-            playersListView.Items.Add(item);
+            playerDataGridView.Rows.Add(player.Name, player.Club, player.GolsCount);
             players.AddPlayer(player);
-
-            if (!findBestClubButton.Enabled)
-                findBestClubButton.Enabled = true;
         }
 
         private void editPlayer(Player player)
         {
-            playersListView.Items.Clear();
+            playerDataGridView.Rows.Clear();
 
             for (int i = 0; i < players.CountPlayer; i++)
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = players[i].Name;
-                item.SubItems.Add(player.Club.ToString());
-                item.SubItems.Add(players[i].GolsCount.ToString());
-                playersListView.Items.Add(item);
+                playerDataGridView.Rows.Add(player.Name, player.Club, player.GolsCount);
             }
         }
 
@@ -50,7 +38,7 @@ namespace Exercise_Liga_Mistru
         {
             eventListBox.Items.Add(
                 $"Původni počet hráčů je: {eventArgs.OriginalCountPlayers}, " +
-                $"aktuální stav je: {playersListView.Items.Count}");
+                $"aktuální stav je: {playerDataGridView.Rows.Count - 1}");
         }
 
         private void addPlayerButton_Click_1(object sender, EventArgs e)
@@ -61,22 +49,22 @@ namespace Exercise_Liga_Mistru
 
         private void removePlayerButton_Click_1(object sender, EventArgs e)
         {
-            if (playersListView.SelectedItems.Count == 0)
+            if (playerDataGridView.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Není vybrán hráč který mý být odstraněn!", "Chyba operace", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
             else
             {
-                int index = playersListView.SelectedItems[0].Index;
-                playersListView.Items.RemoveAt(index);
+                int index = playerDataGridView.SelectedRows[0].Index;
+                playerDataGridView.Rows.RemoveAt(index);
                 players.RemovePlayer(index);
             }
 
             removePlayerButton.Enabled = false;
             editPlayerButton.Enabled = false;
 
-            if (playersListView.Items.Count == 0)
+            if (playerDataGridView.Rows.Count == 0)
             {
                 findBestClubButton.Enabled = false;
             }
@@ -84,7 +72,7 @@ namespace Exercise_Liga_Mistru
 
         private void editPlayerButton_Click_1(object sender, EventArgs e)
         {
-            PlayerWindow playerWindow = new PlayerWindow(new PlayerHandler(editPlayer), players[playersListView.SelectedItems[0].Index]);
+            PlayerWindow playerWindow = new PlayerWindow(new PlayerHandler(editPlayer), players[playerDataGridView.SelectedRows[0].Index]);
             playerWindow.ShowDialog();
 
             removePlayerButton.Enabled = false;
@@ -119,7 +107,12 @@ namespace Exercise_Liga_Mistru
             Close();
         }
 
-        private void playersListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void playerDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            findBestClubButton.Enabled = true;
+        }
+
+        private void playerDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             removePlayerButton.Enabled = true;
             editPlayerButton.Enabled = true;

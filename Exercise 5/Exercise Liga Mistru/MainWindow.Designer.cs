@@ -38,14 +38,15 @@
             this.registerHandlerButton = new System.Windows.Forms.Button();
             this.unregisterHandlerButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
-            this.playersListView = new System.Windows.Forms.ListView();
-            this.playerNameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.playerClubsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.playerGolsColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.eventListBox = new System.Windows.Forms.ListBox();
+            this.playerDataGridView = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.club = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gols = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.constrolsButtonsTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.playerDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -70,7 +71,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel.Controls.Add(this.constrolsButtonsTableLayoutPanel, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.playersListView, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.playerDataGridView, 0, 0);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -202,35 +203,6 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click_1);
             // 
-            // playersListView
-            // 
-            this.playersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.playerNameColumnHeader,
-            this.playerClubsColumnHeader,
-            this.playerGolsColumnHeader});
-            this.playersListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playersListView.Location = new System.Drawing.Point(3, 3);
-            this.playersListView.Name = "playersListView";
-            this.playersListView.Size = new System.Drawing.Size(387, 205);
-            this.playersListView.TabIndex = 0;
-            this.playersListView.UseCompatibleStateImageBehavior = false;
-            this.playersListView.View = System.Windows.Forms.View.Details;
-            this.playersListView.SelectedIndexChanged += new System.EventHandler(this.playersListView_SelectedIndexChanged);
-            // 
-            // playerNameColumnHeader
-            // 
-            this.playerNameColumnHeader.Text = "Jméno";
-            this.playerNameColumnHeader.Width = 145;
-            // 
-            // playerClubsColumnHeader
-            // 
-            this.playerClubsColumnHeader.Text = "Klub";
-            this.playerClubsColumnHeader.Width = 167;
-            // 
-            // playerGolsColumnHeader
-            // 
-            this.playerGolsColumnHeader.Text = "Góly";
-            // 
             // eventListBox
             // 
             this.eventListBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -239,6 +211,38 @@
             this.eventListBox.Name = "eventListBox";
             this.eventListBox.Size = new System.Drawing.Size(487, 94);
             this.eventListBox.TabIndex = 0;
+            // 
+            // playerDataGridView
+            // 
+            this.playerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.playerDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name,
+            this.club,
+            this.gols});
+            this.playerDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playerDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.playerDataGridView.Name = "playerDataGridView";
+            this.playerDataGridView.Size = new System.Drawing.Size(387, 205);
+            this.playerDataGridView.TabIndex = 5;
+            this.playerDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.playerDataGridView_RowsAdded);
+            this.playerDataGridView.SelectionChanged += new System.EventHandler(this.playerDataGridView_SelectionChanged);
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Jméno";
+            this.name.Name = "name";
+            // 
+            // club
+            // 
+            this.club.HeaderText = "Klub";
+            this.club.Name = "club";
+            this.club.ReadOnly = true;
+            // 
+            // gols
+            // 
+            this.gols.HeaderText = "Góly";
+            this.gols.Name = "gols";
+            this.gols.ReadOnly = true;
             // 
             // MainWindow
             // 
@@ -252,6 +256,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.constrolsButtonsTableLayoutPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.playerDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,10 +274,10 @@
         private System.Windows.Forms.Button registerHandlerButton;
         private System.Windows.Forms.Button unregisterHandlerButton;
         private System.Windows.Forms.Button exitButton;
-        private System.Windows.Forms.ListView playersListView;
-        private System.Windows.Forms.ColumnHeader playerNameColumnHeader;
-        private System.Windows.Forms.ColumnHeader playerClubsColumnHeader;
-        private System.Windows.Forms.ColumnHeader playerGolsColumnHeader;
+        private System.Windows.Forms.DataGridView playerDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn club;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gols;
     }
 }
 
